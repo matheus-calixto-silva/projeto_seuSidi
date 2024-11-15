@@ -1,15 +1,13 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 
 import { IAuthProvider } from '../interfaces/IAuthProvider';
-import  { IContext} from '../interfaces/IContext';
-import  {IUser} from '../interfaces/IUser';
+import { IContext } from '../interfaces/IContext';
+import { IUser } from '../interfaces/IUser';
 import useNavigation from '../libs/navegate';
 
 import {
-  addToken,
   getUserLocalStorage,
   loginRequest,
-  removeToken,
   removeUserLocalStorage,
   setUserLocalStorage,
 } from './utils';
@@ -25,7 +23,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
     if (userLocalStorage) {
       setUser(userLocalStorage);
-      addToken(userLocalStorage.token);
       navigate('/inicio');
     } else {
       navigate('/');
@@ -36,15 +33,12 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     const response = await loginRequest(email, password);
 
     setUser(response);
-    addToken(response.token);
-
     setUserLocalStorage(response);
     navigate('/inicio');
   }
 
   function handleLogout() {
     setUser(null);
-    if (user?.email) removeToken();
     removeUserLocalStorage();
     navigate('/');
   }
@@ -55,7 +49,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       handleLogin,
       handleLogout,
     }),
-    [user],
+    [user]
   );
 
   return (

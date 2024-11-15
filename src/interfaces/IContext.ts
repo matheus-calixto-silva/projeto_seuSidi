@@ -1,6 +1,6 @@
-import { ILoggedUSerData } from "./ILoggedUSerData";
+import { ILoggedUserData } from './ILoggedUSerData';
 
-  export interface IContext extends ILoggedUSerData {
-    handleLogin: (username: string, password: string) => Promise<void>;
-    handleLogout: () => void;
-  }
+export interface IContext extends ILoggedUserData {
+  handleLogin: (email: string, password: string) => Promise<void>;
+  handleLogout: () => void;
+}

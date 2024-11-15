@@ -1,19 +1,7 @@
-/* eslint-disable no-console */
-import { ILoggedUSerData } from '../interfaces/ILoggedUSerData';
-import userService from '../services/users';
-import loginService from '../services/login'
+import { ILoggedUserData } from '../interfaces/ILoggedUSerData';
+import { loginRequest as loginUserRequest } from '../services/users';
 
-export function addToken(token: string) {
-    userService.setToken(token);
- 
-}
-
-export function removeToken() {
-  
-    userService.setToken('');
-}
-
-export function setUserLocalStorage(user: ILoggedUSerData | null) {
+export function setUserLocalStorage(user: ILoggedUserData | null) {
   localStorage.setItem('user', JSON.stringify(user));
 }
 
@@ -21,25 +9,19 @@ export function removeUserLocalStorage() {
   localStorage.removeItem('user');
 }
 
-export function getUserLocalStorage() {
-  const json = localStorage.getItem('user');
+export const getUserLocalStorage = () => {
+  const user = localStorage.getItem('user');
+  return user ? JSON.parse(user) : null;
+};
 
-  if (json) {
-    const user = JSON.parse(json);
-    return user ?? null;
-  }
-
-  return null;
-}
-
-export async function loginRequest(username: string, password: string) {
+export async function loginRequest(email: string, password: string) {
   try {
-    const response = await loginService.login({ username, password });
+    const response = await loginUserRequest(email, password);
 
     return response;
   } catch (error) {
-    if (error instanceof Error) console.log(error)
-      
+    if (error instanceof Error) console.log(error);
+
     return null;
   }
 }

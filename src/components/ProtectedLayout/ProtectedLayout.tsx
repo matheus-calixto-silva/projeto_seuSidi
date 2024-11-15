@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 const ProtectedLayout = ({ children }: { children: JSX.Element }) => {
-  const { token, username } = useAuth();
+  const { email } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) {
-      return navigate('/home');
+    if (!email) {
+      return navigate('/');
     }
-  }, [token]);
+  }, [email]);
 
-  if (!username) {
+  if (!email) {
     return <h1>You don&lsquo;t have access</h1>;
   }
 
