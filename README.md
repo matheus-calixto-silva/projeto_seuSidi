@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+```markdown
+# Sidi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sidi é um projeto frontend baseado em React, Vite e JSON Server para simulação de um backend em tempo real. O objetivo principal deste projeto é fornecer uma estrutura básica para aplicações React com integração de API fictícia para desenvolvimento e testes.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**: Biblioteca para construção da interface de usuário.
+- **Vite**: Ferramenta de build rápida e moderna para projetos front-end.
+- **JSON Server**: Servidor REST API falso para simulação de backend.
 
-## Expanding the ESLint configuration
+## Como Rodar o Projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1. Instalar Dependências
 
-- Configure the top-level `parserOptions` property like this:
+Para começar a trabalhar no projeto, primeiro instale as dependências:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Rodar o Projeto em ambiente de Desenvolvimento
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+O servidor de desenvolvimento roda o projeto com Vite e habilita hot reloading.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+Após rodar o comando acima, o Vite iniciará o servidor de desenvolvimento. O aplicativo estará disponível em `http://localhost:5173`.
+
+### 3. Rodar o Servidor Fake API com JSON Server
+
+O JSON Server cria uma API simulada a partir do arquivo `db.json`. Para rodar o servidor:
+
+```bash
+npm run server
+```
+
+Esse comando irá iniciar um servidor local em `http://localhost:3000/usuarios`, onde você pode fazer requisições à API simulada. O arquivo `db.json` contém dados de exemplo para você trabalhar, e o servidor simula as rotas RESTful como GET, POST, PUT e DELETE.
+
+## Como Contribuir
+
+1. Faça um fork do repositório.
+2. Crie uma branch para a sua feature (`git checkout -b feature/nova-feature`).
+3. Faça as alterações necessárias e adicione testes, se possível.
+4. Envie um pull request para a branch `main`.
+
+## Licença
+
+Este projeto é de código aberto, e você pode usá-lo e modificá-lo conforme necessário. Para mais detalhes, consulte a [Licença MIT](LICENSE).
+
+---
+
+Para mais informações sobre o **React**, **Vite**, ou **JSON Server**, consulte as documentações oficiais:
